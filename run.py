@@ -7,7 +7,7 @@ from retinaface import RetinaFace
 input_source = 0  # Change to 'video.mp4' for a video file
 
 # Create output folder if it doesn't exist
-output_folder = "output_video"
+output_folder = "output"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
@@ -24,11 +24,6 @@ if not cap.isOpened():
 # Get the width and height of the frames
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
-# Define codec and create VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for MP4
-output_filename = os.path.join(output_folder, "output_video.mp4")
-out = cv2.VideoWriter(output_filename, fourcc, fps, (frame_width, frame_height))
 
 frame_count = 0
 frame_skip = 5  # Process every 5th frame to speed up
@@ -54,6 +49,7 @@ while True:
     faces = RetinaFace.detect_faces(rgb_frame)
 
     if isinstance(faces, dict):  # If faces are detected
+        print("Face detected...")
         for key, face_data in faces.items():
             facial_area = face_data['facial_area']
             landmarks = face_data['landmarks']
@@ -65,16 +61,16 @@ while True:
             # Draw landmarks
             for point in landmarks.values():
                 cv2.circle(frame, (int(point[0]), int(point[1])), 3, (0, 0, 255), -1)
+        print("Done")
 
     # Write the frame to the video output file
-    print("Writing to ouput file...")
-    out.write(frame)
+    frame_filename = os.path.join(output_folder, f"frame_{frame_count:04d}.jpg")
+    cv2.imwrite(frame_filename, frame)
 
     frame_count += 1
     print(f"Processed frame: {frame_count}")
 
 # Release resources
 cap.release()
-out.release()
 cv2.destroyAllWindows()
 
