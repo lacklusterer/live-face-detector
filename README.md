@@ -1,4 +1,5 @@
 # Live face detector
+Simple scripts to run some of face detection models in opencv
 
 ## Setup
 
