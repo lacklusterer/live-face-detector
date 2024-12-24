@@ -1,6 +1,7 @@
 import cv2
 import sys
 import os
+from datetime import datetime
 
 def get_image(image_path=None):
     if not os.path.exists("tmp"):
@@ -29,3 +30,11 @@ def get_image(image_path=None):
         raise Exception("Error: Cannot load image.")
     
     return image, input_image_path
+
+def write_image(image):
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M:%S.%f")[:-3]
+    output_image_path = os.path.join("output", f"{timestamp}.jpg")
+    cv2.imwrite(output_image_path, image)
+    
+    return output_image_path
+
