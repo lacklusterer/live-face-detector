@@ -3,10 +3,19 @@
 ## Setup
 
 Install dependencies:
+
+
 ```sh
 $ pip install
 ```
 
+
 ## Usage
 
-Run `main.py` with `-h` for usage guide
+Run `main.py -h` for usage guide
+
+
+```sh
+$ main.py -h
+```
+
