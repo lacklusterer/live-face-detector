@@ -2,9 +2,9 @@ import cv2
 import sys
 import os
 
-def get_image(output_folder="output", image_path=None):
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+def get_image(image_path=None):
+    if not os.path.exists("tmp"):
+        os.makedirs("tmp")
     
     if not image_path:
         print("No image path supplied, capturing with webcam ...")
@@ -17,7 +17,7 @@ def get_image(output_folder="output", image_path=None):
         if not ret:
             raise Exception("Error: Cannot capture image from webcam.")
         
-        input_image_path = os.path.join(output_folder, "captured_image.jpg")
+        input_image_path = os.path.join("tmp", "captured_image.jpg")
         cv2.imwrite(input_image_path, frame)
         print(f"Captured image saved to: {input_image_path}")
     else:
@@ -28,5 +28,4 @@ def get_image(output_folder="output", image_path=None):
     if image is None:
         raise Exception("Error: Cannot load image.")
     
-    print("Image successfully loaded.")
     return image, input_image_path
