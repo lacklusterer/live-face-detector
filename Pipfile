@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 opencv-python-headless = "*"
 tf-keras = "*"
+matplotlib = "*"
 
 [dev-packages]
 

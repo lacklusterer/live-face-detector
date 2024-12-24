@@ -7,7 +7,7 @@ Install dependencies:
 
 
 ```sh
-$ pip install
+ pip install
 ```
 
 
@@ -17,6 +17,6 @@ Run `main.py -h` for usage guide
 
 
 ```sh
-$ main.py -h
+ main.py -h
 ```
 

@@ -1,7 +1,7 @@
 import os
 import argparse
-from file_helper import get_image, write_image
-from haarcascades import haarcascades_process
+from helpers.file_helper import get_image, write_image
+from models.haarcascade.haarcascades import haarcascades_process
 
 def main(image_path, debug):
     try:
