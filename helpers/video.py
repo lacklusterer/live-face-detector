@@ -11,6 +11,7 @@ class VideoConfig:
     height: int = 480
     fps: float = 30.0
     window_name: str = "Video Stream"
+    model: str = "yunet"
 
 class VideoProcessor:
     """Handles video capture, processing, and display operations."""
@@ -52,7 +53,13 @@ class VideoProcessor:
 
     def process_frame(self, frame):
         """Process a single frame."""
-        from models.yunet.yunet import process
+        model = self.config.model
+        if model == 'yunet':
+            from models.yunet.yunet import process
+        elif model == 'haarcascade':
+            from models.haarcascade.haarcascades import process
+        else:
+            raise ValueError(f"Unknown model: {model}")
         return process(frame)
 
     def run(self) -> None:

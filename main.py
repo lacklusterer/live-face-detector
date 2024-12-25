@@ -9,13 +9,20 @@ def main():
     parser.add_argument('--fps', type=float, default=30.0, help='Target FPS')
     parser.add_argument('--width', type=int, default=640, help='Camera width')
     parser.add_argument('--height', type=int, default=480, help='Camera height')
+    parser.add_argument(
+        '--model', 
+        choices=['haarcascade', 'yunet'], 
+        default='yunet', 
+        help="Model to use for face detection (default: yunet)"
+    )
     
     args = parser.parse_args()
     
     config = VideoConfig(
         fps=args.fps,
         width=args.width,
-        height=args.height
+        height=args.height,
+        model=args.model
     )
     
     processor = VideoProcessor(config, debug=args.debug)
