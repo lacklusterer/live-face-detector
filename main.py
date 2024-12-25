@@ -13,9 +13,9 @@ def main(image_path, model, debug):
             print(f"[DEBUG] Model selected: {model}")
 
         if model == 'haarcascade':
-            output_image = haarcascades_process(image)
+            output_image = haarcascades_process(image, debug)
         elif model == 'yunet':
-            output_image = yunet_process(image)
+            output_image = yunet_process(image, debug)
         else:
             raise ValueError("Invalid model selected. Choose 'haarcascade' or 'yunet'.")
 
@@ -26,13 +26,13 @@ def main(image_path, model, debug):
     except Exception as e:
         print(e)
 
-def haarcascades_process(frame):
+def haarcascades_process(frame, debug):
     from models.haarcascade.haarcascades import process
-    return process(frame)
+    return process(frame, debug)
 
-def yunet_process(frame):
+def yunet_process(frame, debug):
     from models.yunet.yunet import process
-    return process(frame)
+    return process(frame, debug)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Image processing script")
