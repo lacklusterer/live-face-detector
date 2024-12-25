@@ -1,10 +1,7 @@
 import cv2
 import os
 
-def haarcascades_process(image, debug=False):
-    if not os.path.exists("output"):
-        os.makedirs("output")
-    
+def process(image, debug=False):
     face_cascade = cv2.CascadeClassifier('models/haarcascade/haarcascade_frontalface_default.xml')
     
     output_image = cv2.resize(image, (640, 480))
