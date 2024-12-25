@@ -1,7 +1,8 @@
 import cv2
 import json
 
-def process(image, debug=False):
+def process(frame, debug=False):
+    image = cv2.flip(frame, 1)
     height, width = image.shape[:2]
     face_detector = cv2.FaceDetectorYN_create('models/yunet/face_detection_yunet_2023mar.onnx', "", (width, height))
     _, faces = face_detector.detect(image)
