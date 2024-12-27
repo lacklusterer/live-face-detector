@@ -5,7 +5,7 @@ import time
 import argparse
 
 
-def read_wider_annotations(annotation_file, debug=False):
+def read_wider_annotations(annotation_file, image_set, debug=False):
     """Read Wider Face annotation file and return image paths and face locations."""
     annotations = []
     current_image = None
@@ -20,7 +20,7 @@ def read_wider_annotations(annotation_file, debug=False):
         while i < len(lines):
             line = lines[i].strip()
 
-            if line.endswith('.jpg'):
+            if line.endswith('.jpg') and line.startswith(image_set + "--"):
                 current_image = line
                 face_count = int(lines[i + 1].strip())  # Next line is the face count
                 faces = []

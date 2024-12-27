@@ -7,6 +7,7 @@ def main():
     parser = argparse.ArgumentParser(description='Face Detection Benchmark')
     parser.add_argument('--debug', action='store_true', help='Enable debug output')
     parser.add_argument('--max-images', type=int, help='Maximum number of images to process')
+    parser.add_argument('--image-set', type=str, help='Image set from wider_face to test')
     args = parser.parse_args()
     
     # def haar_detector(image):
@@ -22,7 +23,7 @@ def main():
     wider_face_dir = 'benchmark/wider_face'
     annotations_file = os.path.join(wider_face_dir, 'wider_face_split', 'wider_face_val_bbx_gt.txt')
     all_annotations = []
-    annotations = read_wider_annotations(annotations_file, debug=args.debug)
+    annotations = read_wider_annotations(annotations_file, args.image_set, debug=args.debug, )
     all_annotations.extend(annotations)
     
     if args.debug:
