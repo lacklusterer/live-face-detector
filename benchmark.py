@@ -10,14 +10,13 @@ def main():
     parser.add_argument('--image-set', type=str, help='Image set from wider_face to test')
     args = parser.parse_args()
     
-    # def haar_detector(image):
-    #     from models.yunet.yunet_annote import get_annote
-    #     get_annote
+    def haar_detector(image):
+        from models.haarcascade.haarcascade_annote import get_bounding_boxes
+        return get_bounding_boxes(image)
     
     def yunet_detector(image):
         from models.yunet.yunet_annote import get_bounding_boxes
-        yunet_bounding_boxes = get_bounding_boxes(image)
-        return yunet_bounding_boxes
+        return get_bounding_boxes(image)
     
     # Read annotations
     wider_face_dir = 'benchmark/wider_face'
@@ -29,14 +28,14 @@ def main():
     if args.debug:
         print(f"\nTotal images in dataset: {len(all_annotations)}")
     
-    # print("\nEvaluating Haar Cascade detector...")
-    # haar_results = evaluate_detector(
-    #     haar_detector, 
-    #     all_annotations, 
-    #     "Haar Cascade",
-    #     debug=args.debug,
-    #     max_images=args.max_images
-    # )
+    print("\nEvaluating Haar Cascade detector...")
+    haar_results = evaluate_detector(
+        haar_detector, 
+        all_annotations, 
+        "Haar Cascade",
+        debug=args.debug,
+        max_images=args.max_images
+    )
     
     print("\nEvaluating YuNet detector...")
     yunet_results = evaluate_detector(
@@ -47,9 +46,9 @@ def main():
         max_images=args.max_images
     )
     
-    # print("\nHaar Cascade Results:")
-    # for k, v in haar_results.items():
-        # print(f"{k}: {v:.4f}" if isinstance(v, float) else f"{k}: {v}")
+    print("\nHaar Cascade Results:")
+    for k, v in haar_results.items():
+        print(f"{k}: {v:.4f}" if isinstance(v, float) else f"{k}: {v}")
     
     print("\nYuNet Results:")
     for k, v in yunet_results.items():
