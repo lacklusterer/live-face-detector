@@ -4,6 +4,10 @@ def get_annote(image, debug=False):
     height, width = image.shape[:2]
     face_detector = cv2.FaceDetectorYN_create('models/yunet/face_detection_yunet_2023mar.onnx', "", (width, height))
     _, faces = face_detector.detect(image)
+    if faces is None:
+        if debug:
+            print("No faces detected.")
+        return []
     if debug:
         print(faces)
     return faces
